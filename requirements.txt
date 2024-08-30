@@ -1,0 +1,8 @@
+# Required for the main PySpark application
+pyspark==3.3.1
+pandas==2.0.2
+faker==18.9.0
+
+# Required for testing
+pytest==7.4.0
+unittest2==1.1.0
