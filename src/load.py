@@ -1,4 +1,3 @@
-import os
 from utils import read_csv
 
 def load_data(spark, input_dir, logger):
