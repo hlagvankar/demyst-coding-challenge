@@ -29,6 +29,9 @@ This project is a data processing pipeline that generates a CSV file, anonymizes
 - Python 3.8+
 - Docker
 - PySpark
+- PyTest
+- Faker
+- Pandas
 
 ## Setup Instructions
 
