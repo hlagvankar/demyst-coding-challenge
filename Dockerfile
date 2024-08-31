@@ -34,10 +34,20 @@ ENV PYSPARK_DRIVER_PYTHON=python3
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Specify the command to run on container start
-# Default command to run the anonymize script with sample arguments
-# CMD ["python", "src/anonymize.py", "--input", "data/input/data.csv", "--output", "data/output/anonymized_data.csv"]
+# Ensure helper.py is available
+COPY src/helper.py /app/
+
+# Install pytest for testing
+RUN pip install --no-cache-dir pytest
+
+# Copy test files into the container
+COPY tests/ /app/tests/
+
+# Command to run tests using pytest
+RUN pytest --maxfail=1 --disable-warnings
+
+# Specify the default command to run the anonymize script with sample arguments
+CMD ["python", "src/anonymize.py", "--input", "data/input/data.csv", "--output", "data/output"]
 
 # Alternate Docker Command to Run generate_csv.py first and then PySpark job
-CMD ["sh", "-c", "python src/generate_csv.py --output data/input/data.csv --rows 100 && python src/anonymize.py --input data/input/data.csv --output data/output/anonymized_data.csv"]
-
+#CMD ["sh", "-c", "python src/generate_csv.py --output data/input/data.csv --rows 100 && python src/anonymize.py --input data/input/data.csv --output data/output/anonymized_data.csv"]

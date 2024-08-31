@@ -13,6 +13,8 @@ This project is a data processing pipeline that generates a CSV file, anonymizes
   - `generate_csv.py`: Script to generate the initial CSV file.
   - `anonymize.py`: Script to anonymize the sensitive data.
   - `utils.py`: Utility functions shared across scripts.
+  - `helper.py`: Helper functions
+  - `load.py`: To load data
 - **`tests/`**: Contains unit and integration tests.
   - `test_generate_csv.py`: Unit tests for CSV generation.
   - `test_anonymize.py`: Unit tests for data anonymization.
@@ -43,8 +45,13 @@ docker build -t data-pipeline .
 ```
 
 To run the Docker container:
+On Unix
 ```bash
 docker run -v $(pwd)/data:/app/data data-pipeline
+```
+On Windows
+```bash
+docker run -v ${PWD}/data:/app/data data-pipeline
 ```
 
 ### 3. Generate the CSV File
@@ -72,15 +79,10 @@ If running on a distributed cluster, configure the spark-submit command accordin
 
 ### 6. Testing
 Unit Tests
-To run unit tests:
+To run unit tests through Docker:
 
 ```bash
-pytest tests/
-```
-
-Integration Tests
-```bash
-Integration tests validate the entire pipeline:
+docker run --rm data-pipeline pytest
 ```
 
 ### 7. Performance Considerations
